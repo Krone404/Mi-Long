@@ -12,7 +12,7 @@ engine = pyttsx3.init()
 
 # Language settings
 DEFAULT_SOURCE_LANG = 'en'
-DEFAULT_TARGET_LANG = 'es'  # Example: translate to Spanish
+DEFAULT_TARGET_LANG = 'zh-cn'  # Example: translate to Spanish
 
 @app.route('/')
 def index():

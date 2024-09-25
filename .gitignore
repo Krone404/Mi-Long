@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 static/
+*.wav
+*.mp3
