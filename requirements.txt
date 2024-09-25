@@ -1,4 +1,5 @@
 flask
 SpeechRecognition
 pyttsx3
-deepl 
+translate  
+pydub
