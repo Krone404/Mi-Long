@@ -1,11 +1,19 @@
-var modal = document.getElementById("languageModal");
+// const hamburger = document.getElementById("hamburger");
+// const sidebar = document.getElementById("sidebar");
 
-var fromLanguageBtn = document.getElementById("from-language-btn");
-var toLanguageBtn = document.getElementById("to-language-btn");
+const modal = document.getElementById("languageModal");
 
-var closeBtn = document.getElementsByClassName("close")[0];
+const fromLanguageBtn = document.getElementById("from-language-btn");
+const toLanguageBtn = document.getElementById("to-language-btn");
+
+const closeBtn = document.getElementsByClassName("close")[0];
 
 var selectedButton = null;
+
+// hamburger.onclick = function() {
+//     sidebar.style.display = "block";
+
+// }
 
 fromLanguageBtn.onclick = function() {
     modal.style.display = "block";

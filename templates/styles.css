@@ -138,6 +138,8 @@ body {
 .translate-container {
     margin-top: 20px;
     text-align: center;
+    max-width: 60%;
+    width: 100%;
 }
 
 .language-button {
@@ -147,7 +149,8 @@ body {
     padding: 10px;
     font-size: 18px;
     border-radius: 5px;
-    width: 120px;
+    width: 100%;
+    height: 100px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -165,14 +168,22 @@ body {
 }
 
 .translate-container button {
-    background-color: #888;
+    background-color: #242424;
     border: none;
     padding: 10px 20px;
-    font-size: 18px;
+    font-size: 42px;
     border-radius: 5px;
     color: white;
     cursor: pointer;
     margin-top: 40px;
+}
+
+#translate-btn {
+    margin-top: 125px;
+    background-color: #2e2e2e;
+    width: 100%;
+    height: 100px;
+    box-shadow: rgba(150, 150, 150, 0.8) 0 0 20px 5px;
 }
 
 #to-language-btn {
@@ -191,30 +202,54 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(20, 20, 20, 0.7);
 }
 
+/* Updated modal content with flexbox for the search bar and close button */
 .modal-content {
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 20px;
     background-color: #444;
-    width: 300px;
+    width: 80%;
+    height: 90%;
     text-align: left;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between search bar and close button */
+    padding: 10px;
+    width: 100%; /* Makes the top bar stretch fully */
+}
+
+.search-bar {
+    width: 100%; /* Makes the search bar stretch fully */
+    height: 30%;
+    padding: 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    flex-grow: 1; /* Ensures the search bar takes available space */
+    font-size: 32px;
 }
 
 .close {
     color: #aaa;
-    float: right;
-    font-size: 28px;
+    font-size: 80px; /* Adjust the size of the 'X' */
     font-weight: bold;
+    cursor: pointer;
+    margin: 15px 20px 20px 20px;
 }
 
 .close:hover,
 .close:focus {
     color: white;
     text-decoration: none;
-    cursor: pointer;
 }
 
 .language-list {
@@ -224,21 +259,13 @@ body {
 }
 
 .language-list li {
-    padding: 10px 0;
+    padding: 15px 0px 10px 10px;
     border-bottom: 1px solid #555;
     cursor: pointer;
+    font-size: 42px;
+    color: white;
 }
 
 .language-list li:hover {
     background-color: #555;
-}
-
-.search-bar {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #555;
-    color: white;
-    border: none;
-    border-radius: 5px;
 }
