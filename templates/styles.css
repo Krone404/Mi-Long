@@ -7,12 +7,12 @@ html {
 
 body {
     background-color: rgb(48, 48, 48);
-    margin: 30px;
+    margin: 0; /* Removes default margin */
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh; /* This makes the body take up the full viewport height */
-    margin: 0; /* Removes default margin */
 }
 
 .main-container {
@@ -119,7 +119,7 @@ body {
     max-width: 60%;
     max-height: 30%;
     width: 100%;
-    height:100%;
+    height: 100%;
     gap: 10px; /* Optional: Adds space between the selects */
 }
 
@@ -132,4 +132,109 @@ body {
 
 .select-container select option {
     font-size: 10px;
+}
+
+/* Styles from the modal */
+.translate-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.language-button {
+    background-color: #444;
+    border: none;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    width: 120px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.language-button:hover {
+    background-color: #555;
+}
+
+.arrow {
+    font-size: 24px;
+    color: white;
+    margin: 20px;
+}
+
+.translate-container button {
+    background-color: #888;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.translate-container button:hover {
+    background-color: #777;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+    margin: 15% auto;
+    padding: 20px;
+    background-color: #444;
+    width: 300px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.language-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.language-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #555;
+    cursor: pointer;
+}
+
+.language-list li:hover {
+    background-color: #555;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }

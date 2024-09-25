@@ -1,226 +1,60 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
     <title>Mi-Long</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #333;
-            font-family: Arial, sans-serif;
-            color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .main-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .translate-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .language-button {
-            background-color: #444;
-            border: none;
-            color: white;
-            padding: 10px;
-            font-size: 18px;
-            border-radius: 5px;
-            width: 120px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .language-button:hover {
-            background-color: #555;
-        }
-
-        .language-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .arrow {
-            font-size: 24px;
-            color: white;
-            margin: 20px;
-        }
-
-        .translate-container button {
-            background-color: #888;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            margin-top: 40px;
-        }
-
-        .translate-container button:hover {
-            background-color: #777;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-
-        .modal-content {
-            margin: 15% auto;
-            padding: 20px;
-            background-color: #444;
-            width: 300px;
-            text-align: left;
-            border-radius: 10px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .language-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .language-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #555;
-            cursor: pointer;
-        }
-
-        .language-list li:hover {
-            background-color: #555;
-        }
-
-        .search-bar {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #555;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-
-    </style>
-
 </head>
 
-  <body>
+<body>
     <div class="main-container">
-        <div id="hamburger"><image src="images/menu-icon.svg" width="80px" height="50px"></image></div>
+        <div id="hamburger"><img src="images/menu-icon.svg" width="80px" height="50px"></div>
 
         <div class="mainContent">
             <div class="outer-cirlce-container">
                 <div class="circle-container">
-                <div class="pulsating-circle"></div>
-                <div class="solid-circle"></div>
+                    <div class="pulsating-circle"></div>
+                    <div class="solid-circle"></div>
                 </div>
                 <div class="outer-pulsating-circle"></div>
             </div>
         </div>
 
-        <div class="translate-container">
-            <div class="language-section">
-                <button id="from-language-btn" class="language-button">
-                    English
-                </button>
+        <div class="bottomContent">
+            <div class="translate-container">
+                <div class="language-section">
+                    <button id="from-language-btn" class="language-button">
+                        English
+                    </button>
+                    
+                    <div class="arrow">&#x2195;</div>
+                    
+                    <button id="to-language-btn" class="language-button">
+                        Mandarin
+                    </button>
+                </div>
                 
-                <div class="arrow">&#x2195;</div>
-                
-                <button id="to-language-btn" class="language-button">
-                    Mandarin
-                </button>
+                <button id="translate-btn">Translate</button>
             </div>
-            
-            <button id="translate-btn">Translate</button>
+        
+            <div id="languageModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <input class="search-bar" type="text" placeholder="Search">
+                    <ul class="language-list">
+                        <li>English</li>
+                        <li>German</li>
+                        <li>Mandarin</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    
-    <div id="languageModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <input class="search-bar" type="text" placeholder="Search">
-            <ul class="language-list">
-                <li>English</li>
-                <li>German</li>
-                <li>Mandarin</li>
-            </ul>
-        </div>
+
     </div>
 
-    <script>
-        var modal = document.getElementById("languageModal");
-    
-        var fromLanguageBtn = document.getElementById("from-language-btn");
-        var toLanguageBtn = document.getElementById("to-language-btn");
-    
-        var closeBtn = document.getElementsByClassName("close")[0];
-    
-        var selectedButton = null;
-    
-        fromLanguageBtn.onclick = function() {
-            modal.style.display = "block";
-            selectedButton = fromLanguageBtn;
-        }
-    
-        toLanguageBtn.onclick = function() {
-            modal.style.display = "block";
-            selectedButton = toLanguageBtn;
-        }
-    
-        document.querySelectorAll(".language-list li").forEach(function(item) {
-            item.onclick = function() {
-                selectedButton.innerHTML = this.innerHTML;
-                modal.style.display = "none";
-            }
-        });
-    
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-    
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-  </body>
-
-  <script src="script.js" defer></script>
-  <!-- Link to your JavaScript file -->
+    <script src="script.js" defer></script>
+</body>
 </html>
