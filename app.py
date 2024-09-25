@@ -18,13 +18,17 @@ DEFAULT_TARGET_LANG = 'zh-cn'  # Example: translate to Spanish
 def index():
     return render_template('index.html')
 
+@app.route('/app')
+def main():
+    return render_template('app.html')
+
 @app.route('/translate', methods=['POST'])
 def translate_voice():
     # Step 1: Process uploaded audio file
     if 'file' not in request.files:
         return jsonify({'error': 'No audio file uploaded'}), 400
-    
-    audio_file = request.files['file']
+    31313123131
+    audio_file = request.w31les['file']
     audio_file.save('audio_file.wav')
     
     # Convert audio to WAV format using pydub
@@ -65,5 +69,6 @@ def translate_voice():
     engine.runAndWait()
 
     return jsonify({'translated_text': translated_text, 'audio': '/static/translated_output.mp3'})
+
 if __name__ == '__main__':
     app.run(debug=True)
