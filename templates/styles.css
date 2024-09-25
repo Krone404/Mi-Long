@@ -1,5 +1,45 @@
+html {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
     background-color: rgb(48, 48, 48);
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This makes the body take up the full viewport height */
+    margin: 0; /* Removes default margin */
+}
+
+.main-container {
+    display: grid;
+    height: 100vh; /* Full height of the viewport */
+    width: 100%; /* Full width of the viewport */
+    grid-template-areas: 
+        "hamburger"
+        "mainContent"
+        "bottomContent";
+    grid-template-rows: 10% 60% 30%;
+}
+
+#hamburger {
+    grid-area: hamburger;
+}
+
+#hamburger img {
+    filter: invert(100%) sepia(6%) saturate(239%) hue-rotate(295deg) brightness(113%) contrast(90%);
+    margin: 40px;
+}
+
+.mainContent {
+    grid-area: mainContent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .outer-cirlce-container {
@@ -17,17 +57,6 @@ body {
     transform: translate(-50%, -50%); /* Centers the circle-container inside outer-container */
 }
 
-.pulsating-circle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 210px; /* Size of the middle circle */
-    height: 210px;
-    background-color: rgba(242, 242, 242, 0.6); /* Middle circle color */
-    border-radius: 50%; /* Makes it a circle */
-    animation: pulsate 1.5s infinite; /* Pulsating animation */
-}
-
 .solid-circle {
     position: absolute;
     top: 50%;
@@ -37,6 +66,17 @@ body {
     background-color: rgba(242, 242, 242, 1); /* Inner circle color */
     border-radius: 50%; /* Makes it a smaller circle */
     transform: translate(-50%, -50%); /* Centers the inner circle */
+}
+
+.pulsating-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 210px; /* Size of the middle circle */
+    height: 210px;
+    background-color: rgba(242, 242, 242, 0.6); /* Middle circle color */
+    border-radius: 50%; /* Makes it a circle */
+    animation: pulsate 1.5s infinite; /* Pulsating animation */
 }
 
 .outer-pulsating-circle {
@@ -64,4 +104,32 @@ body {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.bottomContent {
+    grid-area: bottomContent;
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+}
+
+.select-container {
+    display: flex; /* This enables flexbox */
+    flex-direction: column; /* Stacks the elements vertically */
+    max-width: 60%;
+    max-height: 30%;
+    width: 100%;
+    height:100%;
+    gap: 10px; /* Optional: Adds space between the selects */
+}
+
+.select-container select {
+    height: 100%;
+    color: white;
+    font-size: 50px;
+    background-color: rgb(25, 25, 25);
+}
+
+.select-container select option {
+    font-size: 40px;
 }

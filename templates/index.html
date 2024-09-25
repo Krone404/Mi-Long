@@ -1,33 +1,27 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Mi-Long</title>
-        <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
-        <!-- <link rel="icon" href="favicon.ico" type="image/x-icon"> Favicon -->
-    </head>
-    <body>
-        <div id="hamburger"><image src="images/menu-icon.svg" width="100px" height="100px"></image>></div>
-        <div class="outer-cirlce-container">
-            <div class="circle-container">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mi-Long</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="main-container">
+        <div id="hamburger"><image src="images/menu-icon.svg" width="80px" height="50px"></image></div>
+
+        <div class="mainContent">
+            <div class="outer-cirlce-container">
+                <div class="circle-container">
                 <div class="pulsating-circle"></div>
                 <div class="solid-circle"></div>
+                </div>
+                <div class="outer-pulsating-circle"></div>
             </div>
-            <div class="outer-pulsating-circle"></div>
         </div>
-        <label for="languages"></label>
-        <select name="languages" id="cars">
-            <option value="english">English</option>
-            <option value="german">German</option>
-            <option value="mandarin">Mandarin</option>
-        </select>
-        <br>
-        <label for="languages"></label>
-        <select name="languages" id="cars">
-            <option value="english">English</option>
-            <option value="german">German</option>
-            <option value="mandarin">Mandarin</option>
-        </select>
-        <h1>Voice Translation</h1>
+<<<<<<< HEAD
     <button id="record">Record</button>
     <audio id="audioPlayback" controls></audio>
     <p id="translatedText"></p>
@@ -75,6 +69,30 @@
         });
     </script>
     </body>
+=======
+>>>>>>> dba2e6c9182ff6ef19dc6d17501aa8ce70a552ab
 
-    <script src="script.js" defer></script> <!-- Link to your JavaScript file -->
+        <div class="bottomContent">
+            <div class="select-container">
+                <label for="from-languages"></label>
+                <select name="from-languages" id="from-translate">
+                    <option value="english">English</option>
+                    <option value="german">German</option>
+                    <option value="mandarin">Mandarin</option>
+                </select>
+        
+                <label for="to-languages"></label>
+                <select name="to-languages" id="to-translate">
+                    <option value="english">English</option>
+                    <option value="german">German</option>
+                    <option value="mandarin">Mandarin</option>
+                </select>
+            </div>
+        </div>        
+    </div>
+
+  </body>
+
+  <script src="script.js" defer></script>
+  <!-- Link to your JavaScript file -->
 </html>
