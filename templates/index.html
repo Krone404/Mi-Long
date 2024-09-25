@@ -1,22 +1,23 @@
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
     <title>Mi-Long</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="main-container">
-        <div id="hamburger"><image src="images/menu-icon.svg" width="80px" height="50px"></image></div>
+        <div id="hamburger"><img src="images/menu-icon.svg" width="80px" height="50px"></div>
 
         <div class="mainContent">
             <div class="outer-cirlce-container">
                 <div class="circle-container">
-                <div class="pulsating-circle"></div>
-                <div class="solid-circle"></div>
+                    <div class="pulsating-circle"></div>
+                    <div class="solid-circle"></div>
                 </div>
                 <div class="outer-pulsating-circle"></div>
             </div>
@@ -73,26 +74,37 @@
 >>>>>>> dba2e6c9182ff6ef19dc6d17501aa8ce70a552ab
 
         <div class="bottomContent">
-            <div class="select-container">
-                <label for="from-languages"></label>
-                <select name="from-languages" id="from-translate">
-                    <option value="english">English</option>
-                    <option value="german">German</option>
-                    <option value="mandarin">Mandarin</option>
-                </select>
-        
-                <label for="to-languages"></label>
-                <select name="to-languages" id="to-translate">
-                    <option value="english">English</option>
-                    <option value="german">German</option>
-                    <option value="mandarin">Mandarin</option>
-                </select>
+            <div class="translate-container">
+                <div class="language-section">
+                    <button id="from-language-btn" class="language-button">
+                        English
+                    </button>
+                    
+                    <div class="arrow">&#x2195;</div>
+                    
+                    <button id="to-language-btn" class="language-button">
+                        Mandarin
+                    </button>
+                </div>
+                
+                <button id="translate-btn">Translate</button>
             </div>
-        </div>        
+        
+            <div id="languageModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <input class="search-bar" type="text" placeholder="Search">
+                    <ul class="language-list">
+                        <li>English</li>
+                        <li>German</li>
+                        <li>Mandarin</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-  </body>
-
-  <script src="script.js" defer></script>
-  <!-- Link to your JavaScript file -->
+    <script src="script.js" defer></script>
+</body>
 </html>
