@@ -1,1 +1,4 @@
 flask
+SpeechRecognition
+pyttsx3
+deepl 
