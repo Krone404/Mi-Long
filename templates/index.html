@@ -25,49 +25,6 @@
     <button id="record">Record</button>
     <audio id="audioPlayback" controls></audio>
     <p id="translatedText"></p>
-
-    <script>
-        const recordButton = document.getElementById('record');
-        const audioPlayback = document.getElementById('audioPlayback');
-        const translatedText = document.getElementById('translatedText');
-        let mediaRecorder;
-        let audioChunks = [];
-        
-        recordButton.addEventListener('click', () => {
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(stream => {
-                    mediaRecorder = new MediaRecorder(stream);
-                    mediaRecorder.start();
-                    audioChunks = [];
-
-                    mediaRecorder.ondataavailable = event => {
-                        audioChunks.push(event.data);
-                    };
-
-                    mediaRecorder.onstop = () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                        const formData = new FormData();
-                        formData.append('file', audioBlob, 'audio.wav');
-
-                        // Send the audio to the Flask server
-                        fetch('/translate', {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            translatedText.innerText = data.translated_text;
-                            audioPlayback.src = data.audio + '?t=' + new Date().getTime();
-                        })
-                        .catch(err => console.error(err));
-                    };
-
-                    setTimeout(() => {
-                        mediaRecorder.stop();
-                    }, 3000);  // Record for 3 seconds
-                });
-        });
-    </script>
         <div class="bottomContent">
             <div class="translate-container">
                 <div class="language-section">
