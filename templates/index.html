@@ -3,16 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <title>Mi-Long</title>
-    <link rel="stylesheet" href="static/styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="main-container">
-        <div id="hamburger"><img src="static/images/menu-icon.svg" width="80px" height="50px"></div>
 
+    
+    <div class="main-container">
+        <div id="hamburger">
+            <img src="static/images/menu-icon.svg" width="80px" height="50px">
+        </div>
+
+        
         <div class="mainContent">
             <div class="outer-cirlce-container">
                 <div class="circle-container">
@@ -22,9 +23,15 @@
                 <div class="outer-pulsating-circle"></div>
             </div>
         </div>
-    <button id="record">Record</button>
-    <audio id="audioPlayback" controls></audio>
-    <p id="translatedText"></p>
+
+        
+        <button id="record">Record</button>
+        <button id="record2">Record</button> 
+        <audio id="audioPlayback" controls></audio>
+
+        <p id="translatedText"></p>
+
+        
         <div class="bottomContent">
             <div class="translate-container">
                 <div class="language-section">
@@ -42,28 +49,31 @@
                 <button id="translate-btn">Translate</button>
             </div>
             
+            
             <div class="split-screen">
-                <div class="top-half">Top Half</div>
-                <div class="bottom-half">Bottom Half</div>
-            </div>
-        
-            <div id="languageModal" class="modal">
-                <div class="modal-content">
-                    <div class="modal-topbar">
-                        <input class="search-bar" type="text" placeholder="Search">
-                        <span class="close">&times;</span>
-                    </div>                    
-                    <ul class="language-list">
-                        <li>English</li>
-                        <li>German</li>
-                        <li>Mandarin</li>
-                    </ul>
+                <div class="top-container">Top Half</div>
+                <div class="bottom-container">
+                    Bottom Half
+                   
                 </div>
-            </div>            
+            </div>
         </div>
 
+        
+        <div id="languageModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-topbar">
+                    <input class="search-bar" type="text" placeholder="Search">
+                    <span class="close">&times;</span>
+                </div>                    
+                <ul class="language-list">
+                    <li>English</li>
+                    <li>German</li>
+                    <li>Mandarin</li>
+                </ul>
+            </div>
+        </div>            
     </div>
 
-    <script src="static/script.js" defer></script>
 </body>
 </html>
