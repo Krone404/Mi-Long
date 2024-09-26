@@ -175,6 +175,7 @@ body {
     color: white;
     cursor: pointer;
     margin-top: 40px;
+    box-shadow: rgba(150, 150, 150, 0.8) 0 0 20px 5px;
 }
 
 #translate-btn {
