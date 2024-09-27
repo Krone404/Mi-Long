@@ -57,43 +57,116 @@ window.onclick = function(event) {
     }
 }
 
-const recordButton = document.getElementById('record');
-const audioPlayback = document.getElementById('audioPlayback');
-const translatedText = document.getElementById('translatedText');
-let mediaRecorder;
-let audioChunks = [];
+document.addEventListener('DOMContentLoaded', () => {
+    let recognition; // Declare the recognition variable
+    const messageParagraph = document.getElementById('message');
 
-recordButton.addEventListener('click', () => {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(stream => {
-            mediaRecorder = new MediaRecorder(stream);
-            mediaRecorder.start();
-            audioChunks = [];
+    async function translateSpeach(text) {
+        const formData = new FormData();
+        formData.append('text', text); // Correctly append the text
+        formData.append('lang', "en-GB"); // Append the target language
 
-            mediaRecorder.ondataavailable = event => {
-                audioChunks.push(event.data);
-            };
+        try {
+            const response = await fetch('/translate_audio', { // Correct endpoint
+                method: 'POST',
+                body: formData
+            });
 
-            mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                const formData = new FormData();
-                formData.append('file', audioBlob, 'audio.wav');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
 
-                // Send the audio to the Flask server
-                fetch('/translate', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    translatedText.innerText = data.translated_text;
-                    audioPlayback.src = data.audio + '?t=' + new Date().getTime();
-                })
-                .catch(err => console.error(err));
-            };
+            const data = await response.json(); // Extract JSON from response
 
-            setTimeout(() => {
-                mediaRecorder.stop();
-            }, 3000);  // Record for 3 seconds
-        });
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            console.log("Translated Text:", data.translated_text); // Log the translated text
+            return data.translated_text; // Return the translated text
+        } catch (err) {
+            console.error('Error fetching translation:', err);
+            return text; // Return the original text if there's an error
+        }
+    }
+
+    // Function to start speech recognition
+    function startRecognition() {
+        const recognitionLanguageSelect = document.getElementById('recognition-language-select');
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = recognitionLanguageSelect.value; // Set language for recognition
+        recognition.interimResults = false;
+
+        recognition.onresult = async (event) => {
+            const transcript = event.results[0][0].transcript;
+            messageParagraph.innerHTML = `Recognized Text: ${transcript}`;
+
+            // Automatically speak the recognized text
+            const translatedText = await translateSpeach(transcript);
+            console.log("Final Translated Text:", translatedText);
+            speakText(translatedText);
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            messageParagraph.innerHTML = `Error: ${event.error}`;
+        };
+
+        recognition.onend = () => {
+            console.log('Speech recognition ended.');
+        };
+
+        recognition.start();
+        messageParagraph.innerHTML = "Listening... Please speak!";
+    }
+
+    // Function to convert text to speech
+    function speakText(text) {
+        const ttsLanguageSelect = document.getElementById('tts-language-select');
+        const selectedLanguage = ttsLanguageSelect.value; // Get the selected TTS language
+
+        const speech = new SpeechSynthesisUtterance(text);
+        speech.lang = selectedLanguage; // Set the language based on user selection
+        speech.onstart = () => {
+            messageParagraph.innerHTML = "Speaking...";
+        };
+        speech.onend = () => {
+            messageParagraph.innerHTML = "Finished speaking.";
+        };
+        speech.onerror = (event) => {
+            console.error('Speech synthesis error:', event.error);
+            messageParagraph.innerHTML = `Error: ${event.error}`;
+        };
+        window.speechSynthesis.speak(speech);
+    }
+
+    // Event listener for starting recognition
+    document.getElementById('start-recognition').addEventListener('click', () => {
+        startRecognition();
+        document.getElementById('stop-recognition').disabled = false; // Enable stop button
+    });
+
+    // Event listener for stopping recognition
+    document.getElementById('stop-recognition').addEventListener('click', () => {
+        if (recognition) {
+            recognition.stop();
+            document.getElementById('stop-recognition').disabled = true; // Disable stop button
+            messageParagraph.innerHTML = "Recognition stopped.";
+        }
+    });
+
+    // Event listener for starting recognition
+    document.getElementById('start-recognition').addEventListener('click', () => {
+        startRecognition();
+        document.getElementById('stop-recognition').disabled = false; // Enable stop button
+    });
+
+    // Event listener for stopping recognition
+    document.getElementById('stop-recognition').addEventListener('click', () => {
+        if (recognition) {
+            recognition.stop();
+            document.getElementById('stop-recognition').disabled = true; // Disable stop button
+            messageParagraph.innerHTML = "Recognition stopped.";
+        }
+    });
 });
