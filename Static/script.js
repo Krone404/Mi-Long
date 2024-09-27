@@ -41,16 +41,6 @@ closeBtn.onclick = function() {
     modal.style.display = "none";
 }
 
-translateBtn.onclick = function() {
-    circleContainer.classList.add('circle-center');
-    
-    splitScreen.style.display = 'block';
-    
-    setTimeout(function() {
-        topHalf.classList.add('rotate-top');
-    }, 1000);
-};
-
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
@@ -59,7 +49,6 @@ window.onclick = function(event) {
 
 document.addEventListener('DOMContentLoaded', () => {
     let recognition; // Declare the recognition variable
-    const messageParagraph = document.getElementById('message');
 
     async function translateSpeach(text) {
         const formData = new FormData();
@@ -92,14 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to start speech recognition
     function startRecognition() {
-        const recognitionLanguageSelect = document.getElementById('recognition-language-select');
         recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-        recognition.lang = recognitionLanguageSelect.value; // Set language for recognition
+        recognition.lang = "en-GB" // Set language for recognition
         recognition.interimResults = false;
 
         recognition.onresult = async (event) => {
             const transcript = event.results[0][0].transcript;
-            messageParagraph.innerHTML = `Recognized Text: ${transcript}`;
 
             // Automatically speak the recognized text
             const translatedText = await translateSpeach(transcript);
@@ -109,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         recognition.onerror = (event) => {
             console.error('Speech recognition error:', event.error);
-            messageParagraph.innerHTML = `Error: ${event.error}`;
         };
 
         recognition.onend = () => {
@@ -117,56 +103,32 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         recognition.start();
-        messageParagraph.innerHTML = "Listening... Please speak!";
     }
 
     // Function to convert text to speech
     function speakText(text) {
-        const ttsLanguageSelect = document.getElementById('tts-language-select');
-        const selectedLanguage = ttsLanguageSelect.value; // Get the selected TTS language
-
         const speech = new SpeechSynthesisUtterance(text);
-        speech.lang = selectedLanguage; // Set the language based on user selection
+        speech.lang = "zh-CN"; // Set the language based on user selection
         speech.onstart = () => {
-            messageParagraph.innerHTML = "Speaking...";
         };
         speech.onend = () => {
-            messageParagraph.innerHTML = "Finished speaking.";
         };
         speech.onerror = (event) => {
             console.error('Speech synthesis error:', event.error);
-            messageParagraph.innerHTML = `Error: ${event.error}`;
         };
         window.speechSynthesis.speak(speech);
     }
 
+    let flag = false;
     // Event listener for starting recognition
-    document.getElementById('start-recognition').addEventListener('click', () => {
-        startRecognition();
-        document.getElementById('stop-recognition').disabled = false; // Enable stop button
-    });
-
-    // Event listener for stopping recognition
-    document.getElementById('stop-recognition').addEventListener('click', () => {
-        if (recognition) {
+    document.getElementById('translate-btn').addEventListener('click', () => {
+        if (flag === false) {
+            startRecognition();
+            flag = true;
+        } else {
+            flag = false;
             recognition.stop();
-            document.getElementById('stop-recognition').disabled = true; // Disable stop button
-            messageParagraph.innerHTML = "Recognition stopped.";
         }
-    });
-
-    // Event listener for starting recognition
-    document.getElementById('start-recognition').addEventListener('click', () => {
-        startRecognition();
-        document.getElementById('stop-recognition').disabled = false; // Enable stop button
-    });
-
-    // Event listener for stopping recognition
-    document.getElementById('stop-recognition').addEventListener('click', () => {
-        if (recognition) {
-            recognition.stop();
-            document.getElementById('stop-recognition').disabled = true; // Disable stop button
-            messageParagraph.innerHTML = "Recognition stopped.";
-        }
+        
     });
 });
