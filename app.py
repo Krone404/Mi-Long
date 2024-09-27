@@ -3,6 +3,7 @@ from translate import Translator
 
 app = Flask(__name__)
 
+# de, en, zh-cn
 DEFAULT_SOURCE_LANG = 'zh-cn'
 DEFAULT_TARGET_LANG = 'en'  # Example: translate to Spanish
 
