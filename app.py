@@ -3,8 +3,8 @@ from translate import Translator
 
 app = Flask(__name__)
 
-DEFAULT_SOURCE_LANG = 'en'
-DEFAULT_TARGET_LANG = 'zh-CN'  # Example: translate to Spanish
+DEFAULT_SOURCE_LANG = 'zh-cn'
+DEFAULT_TARGET_LANG = 'en'  # Example: translate to Spanish
 
 @app.route('/')
 def index():
@@ -25,4 +25,4 @@ def translate_audio():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
