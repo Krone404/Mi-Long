@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to convert text to speech
     function speakText(text) {
         const speech = new SpeechSynthesisUtterance(text);
-        speech.lang = "zh-CN"; // Set the language based on user selection
+        speech.lang = "en"; // Set the language based on user selection
         speech.onstart = () => {
         };
         speech.onend = () => {
