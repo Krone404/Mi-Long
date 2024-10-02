@@ -4,8 +4,8 @@ from translate import Translator
 app = Flask(__name__)
 
 # de, en, zh-cn
-DEFAULT_SOURCE_LANG = 'zh-cn'
-DEFAULT_TARGET_LANG = 'en'  # Example: translate to Spanish
+DEFAULT_SOURCE_LANG = 'en'
+DEFAULT_TARGET_LANG = 'es'  # Example: translate to Spanish
 
 @app.route('/')
 def index():
