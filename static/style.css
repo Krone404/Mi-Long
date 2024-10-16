@@ -1,0 +1,348 @@
+/* Mobile-first styles (below 768px) */
+body {
+  background-color: rgb(48, 48, 48);
+  margin: 0;
+  color: white;
+
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 35% 15% 35% 15%;
+  grid-template-areas:
+    "topTranslate"
+    "pulseCircle"
+    "bottomTranslate"
+    "buttons";
+  justify-items: center;
+  align-items: center;
+}
+
+.translationBox, .translationBoxRotated{
+  background-color: rgba(48, 48, 48);
+  border: 2px white solid;
+  border-radius: 15px;
+  width: 70%;
+  height: 80%;
+  display: inline-flex;
+  flex-direction: column;
+  box-shadow: 0px 0px 10px 5px rgba(175, 175, 175, 0.7);
+}
+
+.translationBoxRotated {
+  transform: rotate(180deg);
+  float: right;
+  width: 80%;
+  height: 70%;
+  box-shadow: 0px 0px 20px 15px rgba(175, 175, 175, 0.7);
+}
+
+.transcriptionBoxRotated{
+  margin:8px;
+}
+
+.translationBox h2 {
+  margin: 20px;
+  height: min-content;
+  font-size: 42px;
+}
+
+.translationBox p {
+  margin: 0px 20px 20px 20px;
+  height: 100%;
+}
+
+#topBox {
+  grid-area: topTranslate;
+}
+
+#bottomBox {
+  grid-area: bottomTranslate;
+}
+
+.button-custom {
+  background-color: rgba(48, 48, 48, 1); /* Same dark background */
+  color: white; /* White text */
+  border: 2px solid white; /* White border */
+  border-radius: 15px; /* Same rounded corners */
+  padding: 10px 20px; /* Padding to make it clickable */
+  cursor: pointer; /* Pointer cursor */
+  box-shadow: 0px 0px 10px 5px rgba(175, 175, 175, 0.7); /* Same shadow */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Hover effect */
+.button-custom:hover {
+  background-color: rgba(175, 175, 175, 1); /* Slightly lighter on hover */
+}
+
+.label{
+  font-weight: bold;
+  margin: 8px;
+  margin-bottom: -5px;
+}
+.languageSelector {
+  background-color: rgba(207, 207, 207, 1);
+  color: rgb(0, 0, 0);
+  border: 2px solid white; /* White border */
+  border-radius: 15px; /* Same rounded corners */
+  padding: 8px; /* Padding inside the dropdown */
+  margin: 8px;
+  appearance: none; /* Remove default dropdown arrow styling */
+  cursor: pointer; /* Pointer cursor */
+  font-size: 16px; /* Font size */
+}
+
+
+/* Optional: Add hover effect for better interactivity */
+.languageSelector:hover {
+  background-color: rgba(175, 175, 175, 1); /* Slightly lighter on hover */
+}
+
+/* Optional: Remove default arrow styling (may need to add your own custom arrow) */
+.languageSelector {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 20px; /* Space for custom arrow */
+  /* background-image: url("arrow-icon.svg"); /* Add custom dropdown arrow if you have one */
+  /* background-repeat: no-repeat;
+  background-position: right 10px center; */
+}
+
+.outer-cirlce-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  grid-area: pulseCircle;
+}
+
+.circle-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 210px;
+  height: 210px;
+  transform: translate(-50%, -50%);
+}
+.pulsating-circle,
+.solid-circle,
+.outer-pulsating-circle {
+  transition: background-color 0.5s ease, animation 0.5s ease; /* Add transition for background color and animation */
+}
+
+.pulsating-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 210px;
+  height: 210px;
+  background-color: rgba(13, 13, 13, 0.6); /* Start with dark color */
+  border-radius: 50%;
+  animation: none; /* No initial animation */
+}
+
+.solid-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  background-color: rgba(13, 13, 13, 1); /* Start with dark color */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.outer-pulsating-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 250px;
+  background-color: rgba(13, 13, 13, 0.3); /* Start with dark color */
+  border-radius: 50%;
+  animation: none; /* No initial animation */
+  z-index: -1;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* Responsive adjustments for tablets (min-width: 768px) */
+@media (min-width: 768px) {
+  .container {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 35% 15% 35% 15%;
+    grid-template-areas:
+      "topTranslate"
+      "pulseCircle"
+      "bottomTranslate"
+      "buttons";
+    justify-items: center;
+    align-items: center;
+  }
+
+  .translationBox {
+    width: 80%; /* Adjusted width for larger screens */
+    height: 70%;
+    box-shadow: 0px 0px 20px 15px rgba(175, 175, 175, 0.7);
+  }
+
+  .translationBox h2 {
+    font-size: 38px; /* Slightly smaller font for tablets */
+  }
+
+  .outer-cirlce-container {
+    width: 150px; /* Smaller circle size for tablets */
+    height: 150px;
+  }
+
+  .circle-container {
+    width: 140px;
+    height: 140px;
+  }
+
+  .pulsating-circle {
+    width: 140px;
+    height: 140px;
+  }
+
+  .solid-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .outer-pulsating-circle {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.buttons-containter {
+  grid-area: buttons; /* Place in the "buttons" grid area */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  width: 100%; /* Full width of container */
+}
+
+/* Responsive adjustments for desktops (min-width: 1200px) */
+@media (min-width: 1200px) {
+  .container {
+    grid-template-columns: 1fr auto 1fr; /* 3 columns for desktops */
+    grid-template-rows: 3fr 1fr;
+    grid-template-areas:
+      "topTranslate pulseCircle bottomTranslate"
+      "buttons buttons buttons";
+  }
+
+  #rotate{
+    display: none;
+  }
+
+  .buttons-containter {
+    grid-area: buttons; /* Place in the "buttons" grid area */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100%; /* Full width of container */
+    margin-top: -20%;
+  }
+
+  .translationBox {
+    width: 60%;
+    height: 60%;
+  }
+
+  .translationBox h2 {
+    font-size: 42px; /* Larger font size for desktop */
+  }
+
+  .outer-cirlce-container {
+    width: 175px;
+    height: 175px;
+  }
+
+  .circle-container {
+    width: 155px;
+    height: 155px;
+  }
+
+  .pulsating-circle {
+    width: 155px;
+    height: 155px;
+  }
+
+  .solid-circle {
+    width: 125px;
+    height: 125px;
+  }
+
+  .outer-pulsating-circle {
+    width: 175px;
+    height: 175px;
+  }
+}
+
+.button-swap {
+  background-color: rgba(48, 48, 48, 1); /* Same dark background */
+  color: white; /* White text */
+  border: 2px solid white; /* White border */
+  border-radius: 15px; /* Same rounded corners */
+  padding: 10px 20px; /* Padding to make it clickable */
+  cursor: pointer; /* Pointer cursor */
+  box-shadow: 0px 0px 10px 5px rgba(175, 175, 175, 0.7); /* Same shadow */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Hover effect */
+.button-swap:hover {
+  background-color: rgba(175, 175, 175, 1); /* Slightly lighter on hover */
+}
+
+.transcriptionBox{
+  overflow: scroll;
+}
+

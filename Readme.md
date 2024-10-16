@@ -1,24 +1,49 @@
-# 米龙 (Mǐ lóng)
-To Run the Repo:
-1. Go to VS Code and click Source Control (third icon down on the side)
+# Setting up the Project
 
-2. Click Clone Repository and select the repository.
+## Prerequisites
+- Python 3.10
+- pip (Python package installer)
 
-3. Create a virtual environment by:
-    3a. Opening the terminal (CTRL + Shift + ')
-    3b. If the virtual environment is not set up, Paste the following:
+## Setup Virtual Environment
+1. Navigate to the project directory:
+    ```sh
+    cd /path/to/your/project
+    ```
+
+2. Create a virtual environment:
+    ```sh
+    py -3.10 -m venv .venv
+    ```
+
+3. Activate the virtual environment:
+    - On Windows:
+        ```sh
+        .venv\Scripts\activate
         ```
-            python3 -m venv .venv
+    - On macOS/Linux:
+        ```sh
+        source .venv/bin/activate
         ```
-    3c. Then activate the virtual environment after installing.
-        ```
-            .venv/scripts/activate
-        ```
-            You may need to go into powershell and run 
-        ```
-            Set-ExecutionPolicy unrestricted
-        ```
-    3d. Then install the packages
-        ```
-            pip install -r requirements.txt
-        ```
+
+## Install Requirements
+1. Ensure the virtual environment is activated, then install the required packages:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+## Adding Necessary Files
+1. Drag the following files into the root directory of your project:
+    - `key.pem`
+    - `cert.pem`
+    - `.env`
+
+Make sure these files are properly configured and in place before running the application.
+
+## Running the Application
+1. Ensure the virtual environment is activated.
+2. Run the application using the following command:
+    ```sh
+    python main.py
+    ```
+
+This will start the application.

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Live Transcription</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='rotate.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -14,32 +14,9 @@
 
 <body onload="loadTranslation()">
     <div class="container">
-        <div class="translationBox" id="topBox">
+        <div class="translationBoxRotated" id="topBox">
             <!-- <h2 class="languageTitle" id="topTitle">English</h3> -->
-                <label for="language", class="label",id>Select Language:</label>
-                <select class="languageSelector", id="languageFrom", onchange="loadLanguage()">
-                    <option value="en-US" selected>English</option>
-                    <option value="es">Spanish</option>
-                    <option value="fr">French</option>
-                    <option value="de">German</option>
-                    <option value="ro">Romanian</option>
-                    <option value="sv">Swedish</option>
-                    <option value="zh-CN">Mandarin</option>
-                </select>
-                <p class="transcriptionBox" id="topTranscription"></p>
-        </div>
-
-        <div class="outer-cirlce-container">
-            <div class="circle-container">
-                <div class="pulsating-circle"></div>
-                <div class="solid-circle"></div>
-            </div>
-            <div class="outer-pulsating-circle"></div>
-        </div>
-
-        <div class="translationBox" id="bottomBox">
-            <!-- <h2 class="languageTitle" id="bottomTitle">English</h3> -->
-                <label for="translation", class="label">Select Translation Language:</label>
+                <label for="language", class="label",id>Currently Translating Into:</label>
                 <select class="languageSelector", id="languageTo", onchange="loadTranslation()">
                     <option value="en-US">English</option>
                     <option value="es" selected>Spanish</option>
@@ -52,16 +29,39 @@
                 <p class="transcriptionBox" id="bottomTranscription"></p>
         </div>
 
+        <div class="outer-cirlce-container">
+            <div class="circle-container">
+                <div class="pulsating-circle"></div>
+                <div class="solid-circle"></div>
+            </div>
+            <div class="outer-pulsating-circle"></div>
+        </div>
+
+        <div class="translationBox" id="bottomBox">
+            <!-- <h2 class="languageTitle" id="bottomTitle">English</h3> -->
+                <label for="translation", class="label">Currently Translating From:</label>
+                <select class="languageSelector", id="languageFrom", onchange="loadLanguage()">
+                    <option value="en-US" selected>English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                    <option value="ro">Romanian</option>
+                    <option value="sv">Swedish</option>
+                    <option value="zh-CN">Mandarin</option>
+                </select>
+                <p class="transcriptionBoxRotated" id="topTranscription"></p>
+        </div>
+
         <div class="buttons-containter">
             <button class="button-custom" id="toggleBtn">Start Transcription</button>
             <button class="button-swap" id="swapBtn", onclick="swapLanguages()">Swap Languages</button>
-            <form action="/rotate">
+            <form action="/">
                 <button class="button-custom" id="rotate">Rotate Upper Box</button>
             </form>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='rotate.js') }}"></script>
 </body>
 
 </html>

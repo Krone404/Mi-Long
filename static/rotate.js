@@ -3,6 +3,7 @@ let mediaRecorder;
 let temp;
 let isRecording = false;
 let isPulsating = false;
+let isSwapped = false;
 
 function toggleCirclePluse(toggle) {
     const pulsatingCircle = document.querySelector('.pulsating-circle');
@@ -49,7 +50,7 @@ function startRecording() {
         console.log(selectedLanguage)
 
         // Include language in the WebSocket URL as a query parameter
-        socket = new WebSocket(`wss://10.124.166.3:5555/listen?language=${selectedLanguage}`); 
+        socket = new WebSocket(`wss://192.168.4.142:5555/listen?language=${selectedLanguage}`); 
         // PLEASE PLEASE PLEASE PLEASE CHANGE THIS TO YOUR IP IN IPCONFIG TO MAKE THIS WORK. 0.0.0.0 DOES NOT WORK. JUST CHANGE IT FOR THE DEMO.
 
         socket.onopen = () => {
@@ -66,22 +67,23 @@ function startRecording() {
 
         socket.onmessage = (message) => {
             const received = JSON.parse(message.data);
-    
+        
             if (received) {
-                // Extract 'transcriptFrom' and 'transcriptTo' from the received JSON
                 const transcriptFrom = received.find(item => item.type === 'transcriptFrom').transcript;
                 const transcriptTo = received.find(item => item.type === 'transcriptTo').transcript;
         
-                // Get current content of the top and bottom transcription elements
+                // Always write to the same boxes, regardless of isSwapped
                 const currentTop = document.getElementById('topTranscription').innerHTML;
                 const currentBottom = document.getElementById('bottomTranscription').innerHTML;
         
-                // Update the elements with the new transcripts
-                document.getElementById('topTranscription').innerHTML = currentTop + "<br>" + transcriptFrom;
-                document.getElementById('bottomTranscription').innerHTML = currentBottom + '<br><span style="float:right;">' + transcriptTo;
+                // istead of changing the transcription elements, just change what currenttop and currentbottom are written to based on a flag of whether it has been swapped.
+
+                document.getElementById('topTranscription').innerHTML = currentTop + "<br>" + transcriptTo;
+                document.getElementById('bottomTranscription').innerHTML = currentBottom + '<br><span style="float:right;">' + transcriptFrom;
                 speakText(transcriptTo, received.find(item => item.type === 'language').language);
             }
         };
+        
 
         socket.onclose = () => {
             stopRecording();
@@ -123,14 +125,23 @@ function loadLanguage(){
     console.log(selectedTranslation)
 }
 
-function swapLanguages(){
+function swapLanguages() {
     temp = document.getElementById('languageFrom').value;
     document.getElementById('languageFrom').value = document.getElementById('languageTo').value;
-    document.getElementById('languageTo').value = temp
-    temp = document.getElementById('bottomTranscription').innerHTML
-    document.getElementById('bottomTranscription').innerHTML = document.getElementById('topTranscription').innerHTML
-    document.getElementById('topTranscription').innerHTML = temp
-    loadTranslation()
+    document.getElementById('languageTo').value = temp;
+
+    // Flip the boxes visually by adding a CSS class that swaps their display order
+    isSwapped = !isSwapped;
+
+    if (isSwapped) {
+        document.getElementById('topBox').classList.add('swapped');
+        document.getElementById('bottomBox').classList.add('swapped');
+    } else {
+        document.getElementById('topBox').classList.remove('swapped');
+        document.getElementById('bottomBox').classList.remove('swapped');
+    }
+
+    loadTranslation();
 }
 
 function speakText(inputText, language) {
